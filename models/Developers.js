@@ -1,30 +1,36 @@
 const mongoose = require('mongoose');
 
+var TaskSchema = new mongoose.Schema({ //FALTA ACOMODAR
+    name: String,
+    start_descrip: String,
+    status: String, //[ to-do , in-progress , blocked , done]    
+    startDate: Date, //null in case of status is to-do
 
-
+    inproc_descrip: {String, Date},
+    //history: {status + inproc_descrip}
+});  
 
 var DeveloperSchema = new mongoose.Schema({
     name: String,
+    surname: String,
     email: String,
     birthday: { type: Date, default: Date.now },
     nationality: String,
+    tasks: [TaskSchema],
     proyects: [String], }
 );
 
-DeveloperSchema.statics.deleteAll = function(name , callback){
-    return delete({},callback)
-}
 
 //INDEX
 DeveloperSchema.index({ name: 1});
 
+var Task = mongoose.model('Task', TaskSchema);
 
 var Developer = mongoose.model('Developer', DeveloperSchema);
-module.exports = Developer; 
-
+module.exports = Developer, Task;  //module.exports = Task;
 
 //DEFINE INSTANCES
-var someone = new Developer ( { name: "sergio", email: "gmail" } );
+//var someone = new Developer ( { name: "sergio", email: "gmail" } );
 
 /*
 Developer.create(someone, function(someone,err){
@@ -35,26 +41,7 @@ Developer.create(someone, function(someone,err){
 */
 
 
-
-
-
-
 /*
-var TaskSchema = new mongoose.Schema({
-    name: String,
-    start_descrip: String,
-    status: String, //[ to-do , in-progress , blocked , done]    
-    startDate: Date, //null in case of status is to-do
-
-    inproc_descrip: {String, Date},
-
-    dev: Developer,
-    //history: {status + inproc_descrip}
-});  
-var Task = mongoose.model('Task', TaskSchema);
-module.exports = Task;
-
-
 var ProyectSchema = new mongoose.Schema({
     name: String,
     startDate: Date,

@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Developer = require('../models/Developers.js');
 
-/* GET ALL PRODUCTS */
+/* GET ALL DEVELOPERS */
 router.get('/', function(req, res, next) {
   Developer.find(function (err, dev) {
     if (err) return next(err);
@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* GET SINGLE PRODUCT BY ID */
+/* GET SINGLE DEVELOPER BY ID */
 router.get('/:id', function(req, res, next) {
   Developer.findById(req.params.id, function (err, post) {
     if (err) return next(err);
@@ -20,7 +20,19 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-/* SAVE PRODUCT */
+
+/* GET SINGLE DEVELOPER BY NAME */
+router.get('/name/:name', function(req, res, next) {
+  Developer.findOne({name:req.params.name }, function (err, post) {
+    if (err) return next(err);
+    console.log(post)
+    res.json(post);
+  }).exec(); 
+});
+
+
+
+/* SAVE DEVELOPER */
 router.post('/', function(req, res, next) {
   Developer.create(req.body, function (err, post) {
   console.log(req.body);
@@ -29,7 +41,7 @@ router.post('/', function(req, res, next) {
   });
 });
 
-/* UPDATE PRODUCT */
+/* UPDATE DEVELOPER */
 router.put('/:id', function(req, res, next) {
   Developer.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
@@ -37,7 +49,7 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
-/* DELETE PRODUCT BY ID*/
+/* DELETE DEVELOPER BY ID*/
 router.delete('/:id', function(req, res, next) {
   Developer.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
@@ -45,9 +57,9 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-/* DELETE ALL PRODUCT */
+/* DELETE ALL DEVELOPER */
 router.delete('/', function(req, res, next) {
-  Developer.deleteAll(req.body, function (err, post) {
+  Developer.remove(function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
