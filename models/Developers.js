@@ -1,15 +1,44 @@
 const mongoose = require('mongoose');
 
+
+
+
 var DeveloperSchema = new mongoose.Schema({
     name: String,
     email: String,
-    birthday: Date,
+    birthday: { type: Date, default: Date.now },
     nationality: String,
-    proyects: {String}, }
+    proyects: [String], }
 );
+
+DeveloperSchema.statics.deleteAll = function(name , callback){
+    return delete({},callback)
+}
+
+//INDEX
+DeveloperSchema.index({ name: 1});
+
 
 var Developer = mongoose.model('Developer', DeveloperSchema);
 module.exports = Developer; 
+
+
+//DEFINE INSTANCES
+var someone = new Developer ( { name: "sergio", email: "gmail" } );
+
+/*
+Developer.create(someone, function(someone,err){
+    console.log("hi")
+    console.log(someone)
+    res.json(someone);
+});
+*/
+
+
+
+
+
+
 /*
 var TaskSchema = new mongoose.Schema({
     name: String,
@@ -36,9 +65,6 @@ var ProyectSchema = new mongoose.Schema({
 var Proyect = mongoose.model('Proyect', ProyectSchema);
 module.exports = Proyect;
 
-
-
-//DEFINE INSTANCES
 
 //INSTANCE METHODS//
 DeveloperSchema.methods.findAll = function(callback) {   //callback siempre va a tener el resultado de lo que resulta de function, recursivamente
@@ -80,9 +106,7 @@ ProyectSchema.statics.find_ByStatus_Proyects = function(name , callback){
 }
 
 
-DeveloperSchema.statics.deleteAll = function(name , callback){
-    return this.delete({},callback)
-}
+
 
 
 TaskSchema.statics.deleteAll = function(name , callback){
@@ -113,5 +137,4 @@ DeveloperSchema.virtual('age').get(function(percent_discount){
 
 //INDEXS//
 */
-DeveloperSchema.index({ name: 1});
 
