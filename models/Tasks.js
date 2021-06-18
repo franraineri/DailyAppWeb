@@ -12,4 +12,4 @@ var TaskSchema = new mongoose.Schema({ //FALTA ACOMODAR
 
 var Task = mongoose.model('Task', TaskSchema);
 
-module.exports = TaskSchema;
+module.exports = Task;
