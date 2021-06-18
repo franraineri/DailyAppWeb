@@ -9,7 +9,6 @@ var usersRouter = require('./routes/users');
 var devs = require('./routes/devs');
 var tasks = require('./routes/tasks');
 
-
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
