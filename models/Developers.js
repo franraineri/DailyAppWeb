@@ -29,8 +29,8 @@ var Task = mongoose.model('Task', TaskSchema);
 var Developer = mongoose.model('Developer', DeveloperSchema);
 
 //DEFINING INSTANCES
-var someone = new Developer ( { name: "Default", email: "gmail" } );
 var sometask = new Task ( { name: "Default Task", start_descrip: "this is a default task" } );
+var someone = new Developer ( { name: "Default", email: "gmail",tasks:[sometask] } );
 
 Developer.insertMany(someone)
 Task.insertMany(sometask)
@@ -118,7 +118,15 @@ DeveloperSchema.static.updateToMantenance_withCondition = function(condition, ca
 DeveloperSchema.static.updatePrice_withCondition = function(condition, callback){
     return this.updateMany( condition,                  //Que estoy retornando ??
         {   $mul: {price: 1.20},
-        $currentDate: { lastModified: true } });
+        $currentDate: { lastModified: true } });var Developer = mongoose.model('Developer', DeveloperSchema);
+
+//DEFINING INSTANCES
+var someone = new Developer ( { name: "Default", email: "gmail" } );
+var sometask = new Task ( { name: "Default Task", start_descrip: "this is a default task" } );
+
+Developer.insertMany(someone)
+Task.insertMany(sometask)
+module.exports = Developer, Task;  //module.exports = Task;
 }
 
 //VIRTUAL//
