@@ -10,12 +10,13 @@ Desktop.ini
 
 # Linux
 .directory
-*~
-
-
-# npm
 node_modules
 package-lock.json
+*~
+
+# npm
+node_modules*
+package-lock*.json
 *.log
 *.gz
 
