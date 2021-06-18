@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next) {
 
 
 /* GET SINGLE DEVELOPER BY NAME */
-router.get('/name/:name', function(req, res, next) {
+router.get('/name/:name',  function(req, res, next) {
   Developer.findOne({name:req.params.name }, function (err, post) {
     if (err) return next(err);
     console.log(post)

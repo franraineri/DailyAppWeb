@@ -27,10 +27,14 @@ DeveloperSchema.index({ name: 1});
 var Task = mongoose.model('Task', TaskSchema);
 
 var Developer = mongoose.model('Developer', DeveloperSchema);
-module.exports = Developer, Task;  //module.exports = Task;
 
-//DEFINE INSTANCES
-//var someone = new Developer ( { name: "sergio", email: "gmail" } );
+//DEFINING INSTANCES
+var someone = new Developer ( { name: "Default", email: "gmail" } );
+var sometask = new Task ( { name: "Default Task", start_descrip: "this is a default task" } );
+
+Developer.insertMany(someone)
+Task.insertMany(sometask)
+module.exports = Developer, Task;  //module.exports = Task;
 
 /*
 Developer.create(someone, function(someone,err){
