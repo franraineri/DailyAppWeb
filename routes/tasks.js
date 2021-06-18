@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Task = require('../models/Developers.js');
+var Task = require('../models/Tasks.js');
 
 /* GET ALL TaskS */
 router.get('/', function(req, res, next) {
